@@ -3,6 +3,19 @@ module App
 open Fable.Core.JsInterop
 open Fable.Import
 
+[<AutoOpen>]
+module Optics =
+  open Aether
+  open Aether.Operators
+  type Opt =
+    { o: int }
+    static member Opt_: Lens<Opt, int> = (fun o -> o.o), (fun v o -> { o with o = v })
+    static member mOpt_: Prism<Opt, int> = (fun o -> Some o.o), (fun v o -> { o with o = v })
+  let O_O = 1 |> Optic.set Opt.Opt_
+  let o_o = 1 ^= Opt.Opt_
+  let M_o = 1 |> Optic.set Opt.mOpt_
+  let m_o = 1 ^= Opt.mOpt_
+
 let window = Browser.Dom.window
 
 // Get our canvas context 

@@ -1,6 +1,7 @@
 source https://nuget.org/api/v2
 storage:none
 
+nuget Aether
 nuget Fable.Core
 nuget Fable.Promise
 nuget Fable.Fetch
